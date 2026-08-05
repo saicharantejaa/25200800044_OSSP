@@ -1,0 +1,5 @@
+Enter a Linux command: Parent PID: <parent_pid>
+Child PID: <child_pid>
+Child PID: <child_pid>
+Linux <hostname> <kernel-version> <architecture> GNU/Linux
+Child finished execution with exit status 0.
