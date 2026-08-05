@@ -3,41 +3,49 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#define BUFFER_SIZE 1024
+
 int main() {
-    int fd1, fd2;
-    char ch;
-    char src[100], dest[100];
+    int source_fd, dest_fd;
+    ssize_t bytes_read, bytes_written;
+    char buffer[BUFFER_SIZE];
+    char source_file[100], destination_file[100];
 
     printf("Enter source file name: ");
-    scanf("%99s", src);
+    scanf("%99s", source_file);
     printf("Enter destination file name: ");
-    scanf("%99s", dest);
+    scanf("%99s", destination_file);
 
-    fd1 = open(src, O_RDONLY);
-    if (fd1 < 0) {
-        perror("open source");
+    source_fd = open(source_file, O_RDONLY);
+    if (source_fd < 0) {
+        perror("Error opening source file");
         return 1;
     }
 
-    fd2 = open(dest, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (fd2 < 0) {
-        perror("open destination");
-        close(fd1);
+    dest_fd = open(destination_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (dest_fd < 0) {
+        perror("Error opening destination file");
+        close(source_fd);
         return 1;
     }
 
-    while (read(fd1, &ch, 1) > 0) {
-        if (write(fd2, &ch, 1) < 0) {
-            perror("write");
-            close(fd1);
-            close(fd2);
+    while ((bytes_read = read(source_fd, buffer, BUFFER_SIZE)) > 0) {
+        bytes_written = write(dest_fd, buffer, bytes_read);
+        if (bytes_written != bytes_read) {
+            perror("Error writing to destination file");
+            close(source_fd);
+            close(dest_fd);
             return 1;
         }
     }
 
-    printf("File copied successfully.\n");
+    if (bytes_read < 0) {
+        perror("Error reading from source file");
+    } else {
+        printf("File copied successfully.\n");
+    }
 
-    close(fd1);
-    close(fd2);
+    close(source_fd);
+    close(dest_fd);
     return 0;
 }
