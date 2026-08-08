@@ -1,0 +1,26 @@
+saicharan@Atikam:/mnt/d/OS-git/25200800044_Practical/Practical-03$ make
+saicharan@Atikam:/mnt/d/OS-git/25200800044_Practical/Practical-03$ make run
+./observe.sh
+Compiling...
+Executing program in background...
+--- Process States at t=1s (Child is sleeping, Parent is sleeping) ---
+    PID    PPID STAT CMD
+    741     735 S+   ./Output/practical-03.out
+    743     741 S+   ./Output/practical-03.out
+----------------------------------------------------------------------
+--- Process States at t=4s (Parent waiting, Child sleeping) ---
+    PID    PPID STAT CMD
+    741     735 S+   ./Output/practical-03.out
+    743     741 S+   ./Output/practical-03.out
+----------------------------------------------------------------------
+Execution complete. Program output:
+[Parent] Starting program. PID: 741, PPID: 735
+[Child] Process created! PID: 743, PPID: 741
+[Child] Sleeping for 6 seconds to show 'Waiting/Sleeping' state...
+[Child] Woke up. Exiting now.
+[Parent] Created child process with PID: 743
+[Parent] Sleeping for 2 seconds to allow child to sleep...
+[Parent] Woke up. Calling wait() to synchronize with child...
+[Parent] Child has finished execution. Parent exiting.
+saicharan@Atikam:/mnt/d/OS-git/25200800044_Practical/Practical-03$ make clean
+rm -f Output/practical-03.out Output/program_output.txt
