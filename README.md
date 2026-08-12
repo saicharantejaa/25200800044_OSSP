@@ -44,11 +44,8 @@ This repository is organized for the complete OSSP semester work, including week
 The `25200800044_Practical` directory contains twelve practical assignment folders. Each practical includes:
 
 - `Source/` for source code
-- `Output/` for generated outputs and sample runs
-- `Screenshots/` for execution screenshots
+- `docx` for execution screenshots
 - `README.md` for assignment notes
-- `Report.md` for observations and conclusions
-- `Makefile` for build automation
 
 ## Skills
 
