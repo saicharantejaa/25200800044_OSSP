@@ -1,9 +1,0 @@
-*.o
-*.out
-*.exe
-*.a
-*.so
-*.dSYM/
-*.swp
-bin/
-build/
